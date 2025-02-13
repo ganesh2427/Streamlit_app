@@ -8,17 +8,6 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 
-# # Set background color using markdown and CSS
-# st.markdown(
-#     """
-#     <style>
-#         .main {
-#             background-color: #f0f2f6;
-#         }
-#     </style>
-#     """,
-#     unsafe_allow_html=True
-# )
 
 # Sidebar navigation with Home button
 st.sidebar.title("Content")
