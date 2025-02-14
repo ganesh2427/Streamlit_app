@@ -61,7 +61,7 @@ if app_mode != "Select a project":
     st.session_state.page = app_mode
 
     if app_mode == "Plant Leaf Disease Detection":
-        subprocess.run(["streamlit", "run", "projects/plant_leaf_disease.py"])
+        st.sidebar.page_link("projects/plant_leaf_disease.py", label="🌿 Plant Leaf Disease Detection")
     elif app_mode == "Face Recognition":
         subprocess.run(["streamlit", "run", "projects/face_recognition.py"])
     elif app_mode == "OCR":
