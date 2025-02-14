@@ -38,7 +38,6 @@
 
 
 import streamlit as st
-import subprocess
 
 def home_page():
     st.title("Hi")
@@ -61,13 +60,13 @@ if app_mode != "Select a project":
     st.session_state.page = app_mode
 
     if app_mode == "Plant Leaf Disease Detection":
-        st.sidebar.page_link("projects/plant_leaf_disease.py", label="🌿 Plant Leaf Disease Detection")
+        st.switch_page("/pages/plant_lead_disease.py")
     elif app_mode == "Face Recognition":
-        subprocess.run(["streamlit", "run", "projects/face_recognition.py"])
+        st.switch_page("/pages/plant_lead_disease.py")
     elif app_mode == "OCR":
-        subprocess.run(["streamlit", "run", "projects/ocr.py"])
+        st.switch_page("/pages/plant_lead_disease.py")
     elif app_mode == "Sudoku":
-        subprocess.run(["streamlit", "run", "projects/sudoku.py"])
+        st.switch_page("/pages/plant_lead_disease.py")
 
 # Display home page
 if st.session_state.page == "home":
