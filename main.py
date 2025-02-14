@@ -83,3 +83,4 @@ if app_mode != "Select a project":
     except ModuleNotFoundError:
         st.error(f"Module '{module_name}.py' not found!")
 
+# 
