@@ -5,4 +5,4 @@ st.write("This is the Plant Leaf Disease Detection project.")
 
 
 def app():
-    print("hi")
+    print("hi plant")
