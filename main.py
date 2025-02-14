@@ -35,43 +35,51 @@
 # elif st.session_state.page == "Suduko":
 #     st.markdown("""<h1 style='font-size:36px;'>Suduko</h1>""", unsafe_allow_html=True)
 #     st.write("Details about Project.")
-     
+
+
+
 import streamlit as st
 import importlib
+import sys
 
-# Function for the home page
 def home_page():
     st.title("Hi")
     st.write("Welcome!")
 
-# Ensure session state for navigation
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
-# Sidebar navigation
 st.sidebar.title("Content")
 if st.sidebar.button("Home Page"):
     st.session_state.page = "home"
     st.rerun()
 
-# Project selection
 app_mode = st.sidebar.selectbox(
     "Choose a project",
     ["Select a project", "Plant Leaf Disease", "Face Recognition", "OCR", "Suduko"],
     index=0
 )
+if st.session_state.page == "home":
+    home_page()
 
-# Run the selected project
 if app_mode != "Select a project":
-    st.session_state.page = app_mode
-    module_name = app_mode.lower().replace(" ", "_")  # Convert name to match filename
+    if st.session_state.page != app_mode:
+        st.session_state.page = app_mode
+        st.rerun()
+
+    module_name = app_mode.lower().replace(" ", "_")  # Convert to match filename
 
     try:
-        project_module = importlib.import_module(module_name)  # Import from the same folder
-        # project_module.app()  # Call the app function inside the module
+        if module_name in sys.modules:
+            del sys.modules[module_name]  # Force reload of the module
+
+        project_module = importlib.import_module(module_name)  # Import dynamically
+        importlib.reload(project_module)  # Reload module to reflect changes
+
+        if hasattr(project_module, "app"):
+            project_module.app()  # Run app function ONCE
+        else:
+            st.error(f"Module '{module_name}.py' does not have an 'app()' function!")
     except ModuleNotFoundError:
         st.error(f"Module '{module_name}.py' not found!")
 
-# Display home page if no project selected
-if st.session_state.page == "home":
-    home_page()

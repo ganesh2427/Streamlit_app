@@ -1,5 +1,6 @@
 import streamlit as st
 
-st.title("Face Recognition")
-st.write("This is the Face Recognition project.")
 
+def app():
+    st.title("face")
+    st.write("This is the face project.")

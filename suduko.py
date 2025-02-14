@@ -1,5 +1,5 @@
 import streamlit as st
 
-st.title("Sudoku Solver")
-st.write("This is the Sudoku Solver project.")
-
+def app():
+    st.title("Sudoku Solver")
+    st.write("This is the Sudoku Solver project.")
