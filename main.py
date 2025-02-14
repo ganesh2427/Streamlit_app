@@ -1,4 +1,5 @@
 import streamlit as st
+import face_recognition,ocr,plant_leaf_disease,suduko
 
 def home_page():
     st.title("Hi")
@@ -24,8 +25,9 @@ if app_mode != "Select a project":
 if st.session_state.page == "home":
     home_page()
 elif st.session_state.page == "Plant Leaf Diesease Detection":
-    st.markdown("""<h1 style='font-size:36px;'>Plant Leaf Diesease Detection</h1>""", unsafe_allow_html=True)
-    st.write("Details about Project.")
+    # st.markdown("""<h1 style='font-size:36px;'>Plant Leaf Diesease Detection</h1>""", unsafe_allow_html=True)
+    # st.write("Details about Project.")
+    plant_leaf_disease.app()
 elif st.session_state.page == "Face Recognition":
     st.markdown("""<h1 style='font-size:36px;'>Face Recognition</h1>""", unsafe_allow_html=True)
     st.write("Details about Project.")
