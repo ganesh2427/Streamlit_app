@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import os
 import subprocess
+from imagetourl import upload_image
 
 # JSON file to store face data
 JSON_FILE = "input.json"
@@ -31,6 +32,11 @@ def call_addface():
     """Call the addface_.py script whenever JSON is updated."""
     subprocess.run(["python", "addface_.py"], check=True)
 
+# def upload_to_github(image_path):
+#     """Calls imagetourl.py with the image path."""
+#     result = subprocess.run(["python", "imagetourl.py", image_path], capture_output=True, text=True)
+#     return result.stdout.strip()
+
 def app():
     st.title("Face Recognition System")
 
@@ -52,16 +58,18 @@ def app():
                 with open(image_url, "wb") as img_file:
                     img_file.write(image.getbuffer())  # Save the uploaded image
 
-                # Always replace the single stored entry
-                face_db.clear()
-                face_db.append({"name": name, "mail_id": email, "image_url": image_url})
+                github_url = upload_image(image_url)
+
+                if github_url:  # Proceed only if upload succeeds
+                    face_db.clear()
+                    face_db.append({"name": name, "mail_id": email, "image_url": github_url})
                 
                 save_to_json()  # Update JSON file
                 call_addface()  # Call addface_.py after updating JSON
 
                 st.success(f"✅ Face for {name} has been added/updated successfully!")
                 st.write(f"📧 Email: {email}")
-                st.write(f"🖼️ Image saved at: {image_url}")
+                st.write(f"🖼️ Image saved at: {github_url}")
             else:
                 st.error("⚠️ Please fill all details and upload an image.")
 
