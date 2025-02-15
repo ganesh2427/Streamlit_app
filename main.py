@@ -16,7 +16,7 @@ if st.sidebar.button("Home Page"):
 
 app_mode = st.sidebar.selectbox(
     "Choose a project",
-    ["Select a project", "Plant Leaf Disease", "Face Recognition", "face", "Suduko","kjad"],
+    ["Select a project", "Plant Leaf Disease", "Face Recognition", "Face", "Suduko","kjad"],
     index=0
 )
 if st.session_state.page == "home":
