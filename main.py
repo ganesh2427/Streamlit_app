@@ -50,6 +50,8 @@ import streamlit as st
 import importlib
 import sys
 import os
+import face_recognition
+
 
 # Define the mapping of project names to their respective filenames
 PROJECT_FILES = {
